@@ -1,9 +1,9 @@
+# To enable graphiql
 graphiql:
-  enabled: true
   mapping: /graphiql
   endpoint:
     graphql: /graphql
-# To enable metrics
+# To enable graphql metrics
 graphql:
   servlet:
     actuator-metrics: true
