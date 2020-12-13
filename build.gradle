@@ -1,0 +1,34 @@
+plugins {
+	id 'org.springframework.boot' version '2.4.1'
+	id 'io.spring.dependency-management' version '1.0.10.RELEASE'
+	id 'java'
+}
+
+//group = 'sandbox'
+//version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '11'
+
+configurations {
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+}
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	implementation 'com.graphql-java-kickstart:graphql-spring-boot-starter:8.0.0'
+	runtimeOnly 'com.graphql-java-kickstart:graphiql-spring-boot-starter:8.0.0'
+	// To embed GraphiQL tool
+	implementation 'com.graphql-java-kickstart:graphiql-spring-boot-starter:8.0.0'
+	// For subscripion
+	implementation 'io.projectreactor:reactor-core:3.4.1'
+	// For metrics
+	implementation 'org.springframework.boot:spring-boot-starter-actuator'
+	implementation 'io.micrometer:micrometer-registry-prometheus:1.6.0'
+
+	compileOnly 'org.projectlombok:lombok'
+	annotationProcessor 'org.projectlombok:lombok'
+}
