@@ -2,6 +2,7 @@ package sandbox.simple_graphql_server.resolver;
 
 import java.util.List;
 
+import org.reactivestreams.Publisher;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
@@ -9,6 +10,7 @@ import graphql.GraphQLError;
 import graphql.kickstart.spring.error.ThrowableGraphQLError;
 import graphql.kickstart.tools.GraphQLMutationResolver;
 import graphql.kickstart.tools.GraphQLQueryResolver;
+import graphql.kickstart.tools.GraphQLSubscriptionResolver;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import sandbox.simple_graphql_server.data.DataProvider;
@@ -18,7 +20,9 @@ import sandbox.simple_graphql_server.processor.IBookProcessor;
 @Slf4j
 @AllArgsConstructor
 @Component
-public class BookResolver implements GraphQLQueryResolver, GraphQLMutationResolver {
+public class BookResolver implements GraphQLQueryResolver,
+                                     GraphQLMutationResolver,
+                                     GraphQLSubscriptionResolver {
     private final DataProvider dataProvider;
     private final IBookProcessor bookProcessor;
 
@@ -46,6 +50,13 @@ public class BookResolver implements GraphQLQueryResolver, GraphQLMutationResolv
         // Emit an event for subscription.
         bookProcessor.emit(book);
         return book;
+    }
+
+    /**
+     * Subscription: Publish an event that a book is registered.
+     */
+    public Publisher<Book> subscribeBooks() {
+        return bookProcessor.publish();
     }
 
     /**
