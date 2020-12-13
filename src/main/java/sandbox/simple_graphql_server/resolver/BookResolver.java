@@ -54,6 +54,7 @@ public class BookResolver implements GraphQLQueryResolver,
 
     /**
      * Subscription: Publish an event that a book is registered.
+     * Need to return Publisher on reactive-streams.
      */
     public Publisher<Book> subscribeBooks() {
         return bookProcessor.publish();
