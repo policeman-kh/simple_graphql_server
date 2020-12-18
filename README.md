@@ -9,3 +9,5 @@ To confirm implementation of GraphQL server.
 * Mutation
 * Subscription
 
+## Application structure image
+![application_image.png](./application_image.png)
